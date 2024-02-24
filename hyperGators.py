@@ -1,5 +1,5 @@
-#Karan, Jose
-
+#Karan A. Faldu, Jose
+#Contains Guardian Monsters Artwork by Georg Eckert / limbusdev
 
 def main():
     numRuns=0
