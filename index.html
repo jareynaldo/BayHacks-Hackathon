@@ -8,10 +8,56 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/css-toggle-switch@latest/dist/toggle-switch.css" />
     <link href="styles/output.css" rel="stylesheet" />
-    <title>Document</title>
+    <link rel="stylesheet" href="https://pyscript.net/releases/2024.2.1/core.css">
+    <script type="module" src="https://pyscript.net/releases/2024.2.1/core.js"></script>
+    <title>Hyper Gator</title>
 </head>
 <body>
+    <section id="big screen">
+        <h1 id="Tittle">Hyper Gator</h1>
+        <div id="Game screen">
+            <div id="top section"><!--will hold the section below it, splits it into two descrete parts-->
+                <div id="currently displaying"></div> <!--where the black hole, monsters, and store will be displayed-->
+                
+            </div>
+            <div id="bottom section"><!--the console will be down here-->
+                <di id="displaying data">
+                    <div id="shards and helth">
+                        <div id="shards">
+                            <h4 >Shards</h4>
+                            <h5 id="number of shards"></h5>
+                        </div>
+                        <div id="health">
+                            <h4>Health</h4>
+                            <div id="number of health"></div>
+                        </div>
+                    </div>
+                    <div id="skills">
+                        
+                    </div>
+                    <div id="points">
+                        <div id="attackPoints">
+                            <h4>Attack Points</h4>
+                            <div id="number of attack"></div>
+                        </div>
+                        <div id="deffensePoints">
+                            <h4>Attack Points</h4>
+                            <div id="number of deffense"></div>
+                        </div>
+                        <div id="deffensePoints">
+                            <h4>Attack Points</h4>
+                            <div id="number of speed"></div>
+                        </div>
+                    </div>
+
+
+                </di>
+            </div>
+
+        </div>
+    </section>
     
 </body>
 <script> src="script.js"</script>
+<script type="py" src="./main.py" config="./pyscript.json"></script>
 </html>
