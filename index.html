@@ -6,30 +6,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/css-toggle-switch@latest/dist/toggle-switch.css" />
-    <link href="styles/output.css" rel="stylesheet" />
+    <link href="css/output.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://pyscript.net/releases/2024.2.1/core.css">
     <script type="module" src="https://pyscript.net/releases/2024.2.1/core.js"></script>
+
     <title>Hyper Gator</title>
 </head>
 <body>
-    <section id="big screen">
+    <section id="big-screen">
         <h1 id="Tittle">Hyper Gator</h1>
-        <div id="Game screen">
-            <div id="top section"><!--will hold the section below it, splits it into two descrete parts-->
-                <div id="currently displaying"></div> <!--where the black hole, monsters, and store will be displayed-->
+        <div id="Game-screen">
+            <div id="top-section"><!--will hold the section below it, splits it into two descrete parts-->
+                <div id="currently-displaying">
+                    <div id="name-input">
+                        <h2>What is your name, dear warrior?</h2>
+                        <input type="text" id="english" placeholder="" />
+                        <button id="start-btn">Begin adventure</button>
+                    </div>
+                    
+
+                </div> <!--where the black hole, monsters, and store will be displayed-->
                 
             </div>
-            <div id="bottom section"><!--the console will be down here-->
-                <di id="displaying data">
-                    <div id="shards and helth">
+            <div id="bottom-section"><!--the console will be down here-->
+                <di id="displaying-data">
+                    <div id="shards-and-health">
                         <div id="shards">
                             <h4 >Shards</h4>
-                            <h5 id="number of shards"></h5>
+                            <h5 id="number-of-shards"></h5>
                         </div>
                         <div id="health">
                             <h4>Health</h4>
-                            <div id="number of health"></div>
+                            <div id="number-ofhealth"></div>
                         </div>
                     </div>
                     <div id="skills">
@@ -38,16 +46,17 @@
                     <div id="points">
                         <div id="attackPoints">
                             <h4>Attack Points</h4>
-                            <div id="number of attack"></div>
+                            <div id="number-of-attack"></div>
                         </div>
                         <div id="deffensePoints">
                             <h4>Attack Points</h4>
-                            <div id="number of deffense"></div>
+                            <div id="number-of-deffense"></div>
                         </div>
                         <div id="deffensePoints">
                             <h4>Attack Points</h4>
-                            <div id="number of speed"></div>
+                            <div id="number-of-speed"></div>
                         </div>
+
                     </div>
 
 
@@ -58,6 +67,6 @@
     </section>
     
 </body>
-<script> src="script.js"</script>
-<script type="py" src="./main.py" config="./pyscript.json"></script>
+<script type="py" src="hyperGators.py" config="pyscript.json"></script>
+<script src="script.js"></script>
 </html>
