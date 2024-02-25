@@ -6,12 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400&display=swap" rel="stylesheet">
-    <link href="css/output.css" rel="stylesheet" />
-    <link rel="stylesheet" href="pyscript-main/pyscript.core/src/core.css" />
-    <script  type="module" src="pyscript-main/pyscript.core/src/core.js"></script>
-
-
-
+    <link rel="stylesheet" href="css/output.css" />
 
     <title>Hyper Gator</title>
 </head>
@@ -23,7 +18,6 @@
                 <div id="currently-displaying">
                     <div id="name-input">
                         <h2>What is your name, dear warrior?</h2>
-                        <input type="text" id="textInput" placeholder="" />
                         <button id="start-btn" py-click="startGame">Begin adventure</button>
                     </div>
                     
@@ -44,8 +38,9 @@
                             
                         </div>
                     </div>
-                    <div id="skills" class="bottom">
-                        
+                    <div id="input" class="bottom">
+                        <input type="text" id="textInput" placeholder="" onkeydown="if(event.key==='Enter'){handleInput();}">
+
                     </div>
                     <div id="points" class="bottom">
                         <div id="attackPoints">
@@ -68,7 +63,6 @@
 
         </div>
     </section>
-    <script type="py"src="hyperGators.py" config="pyscript.json"></script>
 
 </body>
 <script src="script.js"></script>

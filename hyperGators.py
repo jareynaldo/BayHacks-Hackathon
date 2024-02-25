@@ -5,10 +5,10 @@ import random
 from pyscript import document
 
 
+print("hellp")
 
 
-
-def startGame():
+def startGame(event):
     numRuns = 0
     points = 0
     health = 5

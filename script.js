@@ -5,11 +5,16 @@ let health = document.getElementById('health');
 let tittle  = document.getElementById('Tittle');
 const bottomSection = document.getElementById('bottom-section')
 const topSection = document.getElementById('top-section')
+let textOutput = null;
+let player_name = "";
 
 
 const bottomClass = document.getElementsByClassName('bottom')
 const btn = document.getElementsByTagName('button');
 
+function starGame(){
+console.log("hello");
+}
 
 [...btn].forEach(nexty => {
     nexty.addEventListener("click", () => {
@@ -39,7 +44,7 @@ const btn = document.getElementsByTagName('button');
         
         doTheTHings();
         let yuhsuh = document.createElement('p');
-        yuhsuh.className = "text-output"
+        yuhsuh.id = "text-output"
         displayingData.append(yuhsuh);
         
 
@@ -47,11 +52,20 @@ const btn = document.getElementsByTagName('button');
             topSection.style.height = 40;
             tittle.remove();
 
-        } , 5000);
+        } , 3000);
 
-        
+        textOutput = document.getElementById('text-output');
+        textOutput.style.animation = "arriveQuietly 4s ease-out forwards";
+        textOutput.classList.add('show');
+        textOutput.innerHTML = "Welcome to HyperGator!\n" 
+        + "We hired you to bring back unobtainium from the end of the Black Hole." + 
+        " Ya know... on account of it being unobtainium and all." + 
+        " Anywayssss, that's why we hired you.... <br>What was your name again?"
+        + " <br> <br> Enter player name:                         ";    
     });
+   
 });
+
 
 function doTheTHings(){
     bottomSection.style.height = "40vh";
@@ -61,5 +75,38 @@ function doTheTHings(){
 
     
 };
+let counter = 0;
+
+function handleInput() {
+    let inputValue = document.getElementById('textInput');
+    response = inputValue.value;
+
+
+    inputValue.innerHTML = "";
+    
+    if(counter == 0){
+        let numRuns = 0;
+        let points = 0;
+        let health = 5;
+        let attack = 5;
+        let defense = 5;
+        let speed = 5;
+        let skills=["Ram", "-", "-"]; 
+    
+        let stats = [points, health, attack, defense, speed, skills, numRuns];
+    
+        textOutput.style.animation = "arriveQuietly 4s ease-out forwards";
+        textOutput.innerHTML = 'Ah yes, the infamoussss Gator Pirate ' + response +        
+        + "<br> Next time you pop around, I'll have a sssshop open for you <br>" + 
+        " <br>You don't have any money?" + "<br>..." +  "<br>..."
+        + " <br> Well if you find any unobtainium sssshardssss in there, you can buy my waressss with those" +
+        "<br> Go on then! Go get me some unobtainium (hit enter to continue)";
+
+        counter = 1;
+    };
+
+    
+
+}
 
 
