@@ -229,14 +229,14 @@ def openShop(stats):
                 stat_track=0
                 match stat_option:
                     case 1:
-                        print(f'It will cost {(stats[1] - 9) * 100} shards')
+                        print(f'It will cost {(stats[1] - 4) * 100} shards')
                         print(f'Are you sure you want to buy a Health Point?\nYes or No?', end = '')
                         confirm = input()
-                        while confirm not in {"Yes", "No", "Y", "N"} or ((stats[1] - 9) * 100) > stats[0]:
+                        while confirm not in {"Yes", "No", "Y", "N"} or ((stats[1] - 4) * 100) > stats[0]:
                             if confirm not in {"Yes", "No", "Y", "N"}:
                                 print("Invalid input! Please enter Yes, No, Y, or N: ", end='')
                                 confirm = input()
-                            if ((stats[1] - 9) * 100) > stats[0]:
+                            if ((stats[1] - 4) * 100) > stats[0]:
                                 if confirm.__eq__("Yes") or confirm.__eq__("Y"):
                                     print("\nNOT ENOUGH SHARDS")
                                 confirm = "No"
@@ -245,14 +245,14 @@ def openShop(stats):
                         stat_track=1
 
                     case 2:
-                        print(f'It will cost {(stats[2] - 9) * 100} shards')
+                        print(f'It will cost {(stats[2] - 4) * 100} shards')
                         print(f'Are you sure you want to buy a Attack Point?\nYes or No?', end = '')
                         confirm = input()
-                        while confirm not in {"Yes", "No", "Y", "N"} or ((stats[2] - 9) * 100) > stats[0]:
+                        while confirm not in {"Yes", "No", "Y", "N"} or ((stats[2] - 4) * 100) > stats[0]:
                             if confirm not in {"Yes", "No", "Y", "N"}:
                                 print("Invalid input! Please enter Yes, No, Y, or N: ", end='')
                                 confirm = input()
-                            if ((stats[2] - 9) * 100) > stats[0]:
+                            if ((stats[2] - 4) * 100) > stats[0]:
                                 if confirm.__eq__("Yes") or confirm.__eq__("Y"):
                                     print("\nNOT ENOUGH SHARDS")
                                 confirm = "No"
@@ -260,14 +260,14 @@ def openShop(stats):
                                 break
                         stat_track=2
                     case 3:
-                        print(f'It will cost {(stats[3] - 9) * 100} shards')
+                        print(f'It will cost {(stats[3] - 4) * 100} shards')
                         print(f'Are you sure you want to buy a Defense Point?\nYes or No?', end = '')
                         confirm = input()
-                        while confirm not in {"Yes", "No", "Y", "N"} or ((stats[3] - 9) * 100) > stats[0]:
+                        while confirm not in {"Yes", "No", "Y", "N"} or ((stats[3] - 4) * 100) > stats[0]:
                             if confirm not in {"Yes", "No", "Y", "N"}:
                                 print("Invalid input! Please enter Yes, No, Y, or N: ", end='')
                                 confirm = input()
-                            if ((stats[3] - 9) * 100) > stats[0]:
+                            if ((stats[3] - 4) * 100) > stats[0]:
                                 if confirm.__eq__("Yes") or confirm.__eq__("Y"):
                                     print("\nNOT ENOUGH SHARDS")
                                 confirm = "No"
@@ -275,14 +275,14 @@ def openShop(stats):
                                 break
                         stat_track=3
                     case 4:
-                        print(f'It will cost {(stats[4] - 9) * 100} shards')
+                        print(f'It will cost {(stats[4] - 4) * 100} shards')
                         print(f'Are you sure you want to buy a Health Point?\nYes or No?', end = '')
                         confirm = input()
-                        while confirm not in {"Yes", "No", "Y", "N"} or ((stats[4]-9)*100)>stats[0]:
+                        while confirm not in {"Yes", "No", "Y", "N"} or ((stats[4]-4)*100)>stats[0]:
                             if confirm not in {"Yes", "No", "Y", "N"}:
                                 print("Invalid input! Please enter Yes, No, Y, or N: ", end='')
                                 confirm = input()
-                            if ((stats[4]-9)*100)>stats[0]:
+                            if ((stats[4]-4)*100)>stats[0]:
                                 if confirm.__eq__("Yes") or confirm.__eq__("Y"):
                                     print("\nNOT ENOUGH SHARDS")
                                 confirm = "No"
@@ -294,7 +294,7 @@ def openShop(stats):
                         openShop(stats)
 
                 if confirm.__eq__("Yes") or confirm.__eq__("Y"):
-                    stats[0]-=(stats[stat_track]-9)*100
+                    stats[0]-=(stats[stat_track]-4)*100
                     stats[stat_track]+=1
                 openShop(stats)
 

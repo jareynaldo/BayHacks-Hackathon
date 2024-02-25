@@ -76,13 +76,13 @@ function doTheTHings(){
     
 };
 let counter = 0;
+let stats = [];
+let inputValue = null; 
 
 function handleInput() {
-    let inputValue = document.getElementById('textInput');
-    response = inputValue.value;
-
-
-    inputValue.value = "";
+    inputValue = document.getElementById('textInput');
+    
+    let name = getData();
     
     if(counter == 0){
         let numRuns = 0;
@@ -93,10 +93,10 @@ function handleInput() {
         let speed = 5;
         let skills=["Ram", "-", "-"]; 
     
-        let stats = [points, health, attack, defense, speed, skills, numRuns];
+        stats = [points, health, attack, defense, speed, skills, numRuns];
     
-        textOutput.style.animation = "arriveQuietly 4s ease-out forwards";
-        textOutput.innerHTML = 'Ah yes, the infamoussss Gator Pirate ' + response +        
+        
+        textOutput.innerHTML = 'Ah yes, the infamoussss Gator Pirate ' + response + "."+        
         "<br> Next time you pop around, I'll have a sssshop open for you <br>" + 
         " <br>You don't have any money?" + "<br>..." +  "<br>..."
         + " <br> Well if you find any unobtainium sssshardssss in there, you can buy my waressss with those" +
@@ -109,5 +109,21 @@ function handleInput() {
     
 
 }
+
+function getData(){
+
+    response = inputValue.value;
+    inputValue.value = "";
+    return response;
+    
+}
+
+
+let numOfShards = document.getElementById("number-of-shards");
+let numOfHealth = document.getElementById("health");
+let attackPoints = document.getElementById("number-of-attack");
+let deffensePoints= document.getElementById("number-of-deffense");
+let speedPoints= document.getElementById("number-of-speed");
+
 
 

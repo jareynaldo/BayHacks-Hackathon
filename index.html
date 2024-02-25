@@ -17,7 +17,6 @@
             <div id="top-section"><!--will hold the section below it, splits it into two descrete parts-->
                 <div id="currently-displaying">
                     <div id="name-input">
-                        <h2>What is your name, dear warrior?</h2>
                         <button id="start-btn" py-click="startGame">Begin adventure</button>
                     </div>
                     
@@ -29,8 +28,8 @@
                 <di id="game-stats" >
                     <div id="shards-and-health" class="bottom">
                         <div id="shards" >
-                            <h4 >Shards</h4>
-                            <h5 id="number-of-shards"></h5>
+                            <h4 >Shards<div id="number-of-shards"></div></h4>
+
                         </div>
                         <div id="health">
                             <h4>Health <progress id="health" value="100" max="100"></progress> </h4>
@@ -44,7 +43,7 @@
                     </div>
                     <div id="points" class="bottom">
                         <div id="attackPoints">
-                            <h4>Attack Points </h4>
+                            <h4>Attack Points <div id="number-of-attack"></div></h4>
                             
                         </div>
                         <div id="deffensePoints">
