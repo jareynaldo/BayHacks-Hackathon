@@ -15,12 +15,15 @@ body{
   font-size: 6rem;
   color: rgb(152, 120, 216);
   margin-top: 0rem;
+  padding-top: 10rem;
   margin-bottom: 1rem;
 }
-#top-section{
-  height: 37vh;
+#currently-displaying{
+  display: flex;
+  font-size: larger;
+  width: 40vw;
+  
 }
-
 #name-input{
   margin-top: 5rem;
   text-align: center;
@@ -44,12 +47,11 @@ body{
     width: 10vw !important;
   }
 }
-#bottom-section{
-  height: 37vh;
-}
 
-#displaying-data{
-  margin-top: 2rem;
+
+
+#game-stats{
+  height: 0;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -60,33 +62,42 @@ body{
     width: 33vw;
     margin: 2rem;
   }
-/* }
-#blackhole {
-  opacity: 0%;
-   /* Smooth transition for the 'bottom' property */
-
 }
 
 
-
+#top-section{
+  height: 46vh;
+}
+#bottom-section{
+  opacity: 0;
+  height: 0px;
+}
+.text-output{
+  font-size: large;
+  margin-left: 2rem;
+  max-width: 45vw;
+  max-height: 45vh;
+}
 
  #blackhole {
   position: fixed;
-  width: 40vw;
+  width: 45%;
   bottom: 0; /* Starting position at the bottom of the viewport */
-  left: 30%;
-  transform: translateY(-50%);
+  left: 50%;      
+  max-width: 600px;
+
   animation: riseUp 5s ease forwards; /* Use the 'riseUp' animation */
 }
 
 @keyframes riseUp {
   from {
-      bottom: -100%; /* Starting position below the viewport */
+      top: 50%; /* Starting position below the viewport */
       opacity: 0%;
   }
   to {
-      bottom: 40%; /* Ending position above the viewport */
+      top: 2rem; /* Ending position above the viewport */
       opacity: 100%;
+
   }
 }
 
