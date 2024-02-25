@@ -6,7 +6,9 @@ from pyscript import document
 
 
 
-def main():
+
+
+def startGame():
     numRuns = 0
     points = 0
     health = 5
@@ -23,13 +25,9 @@ def main():
     print("Ya know... on account of it being unobtainium and all.")
     print("Anywayssss, that's why we hired you.... What was your name again? \n")
     print("Enter player name: ", end ='')
-    player_name = "";
-    btn = document.querySelector("start-btn")
-    def startGame(btn):
-        input_text = document.querySelector("#name-input")
-        player_name = input_text.value
 
-    btn.bind('click', startGame)
+    input_text = document.querySelector("#textInput")
+    player_name = input_text.value
 
     print(f'Ah yes, the infamoussss Gator Pirate {player_name} \n')
 
@@ -650,4 +648,4 @@ class Player(Creatures):
         self.skills = stats[5]
         self.shards = 0
 if __name__ == "__main__":
-    main()
+    startGame()

@@ -1,6 +1,6 @@
 /*! (c) PyScript Development Team */
 
-import stickyModule from "sticky-module";
+import stickyModule from "../../../node_modules/sticky-module";
 import "@ungap/with-resolvers";
 
 import {
