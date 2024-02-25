@@ -82,7 +82,7 @@ function handleInput() {
     response = inputValue.value;
 
 
-    inputValue.innerHTML = "";
+    inputValue.value = "";
     
     if(counter == 0){
         let numRuns = 0;
@@ -97,13 +97,14 @@ function handleInput() {
     
         textOutput.style.animation = "arriveQuietly 4s ease-out forwards";
         textOutput.innerHTML = 'Ah yes, the infamoussss Gator Pirate ' + response +        
-        + "<br> Next time you pop around, I'll have a sssshop open for you <br>" + 
+        "<br> Next time you pop around, I'll have a sssshop open for you <br>" + 
         " <br>You don't have any money?" + "<br>..." +  "<br>..."
         + " <br> Well if you find any unobtainium sssshardssss in there, you can buy my waressss with those" +
         "<br> Go on then! Go get me some unobtainium (hit enter to continue)";
 
         counter = 1;
     };
+    
 
     
 
