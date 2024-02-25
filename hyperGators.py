@@ -1,16 +1,18 @@
-#Karan A. Faldu, Jose
+#Karan A. Faldu, Jose Reynaldo
 #Contains Guardian Monsters Artwork by Georg Eckert / limbusdev
+import math
+import random
 
 def main():
-    numRuns=0
-    points=100000
-    health = 10
-    attack=10
-    defense=10
-    speed=10
+    numRuns = 0
+    points = 0
+    health = 5
+    attack = 5
+    defense = 5
+    speed = 5
     skills=["Ram", "-", "-"]
 
-    stats = [points, health, defense, attack, speed, skills]
+    stats = [points, health, attack, defense, speed, skills, numRuns]
 
     print("Welcome to HyperGator!\n")
     print("We hired you to bring back unobtainium from the end of the Black Hole.")
@@ -34,26 +36,146 @@ def openStart(stats):
     print("----------")
     print("1. Start Run")
     print("2. Shop")
-    print("3. Exit")
+    print("3. Player Stats")
+    print("4. Exit")
     print("\nEnter Menu Selection: ", end='')
     menu_option = input()
-    while not menu_option.isnumeric() or menu_option not in {"1", "2", "3"}:
+    while not menu_option.isnumeric() or menu_option not in {"1", "2", "3", "4"}:
         print("Invalid input! Please enter an integer from the menu selection: ", end='')
         menu_option = input()
     menu_option = int(menu_option)
-    if menu_option == 3:
+    if menu_option == 4:
         print("\nGoodbye! Please come work for HyperGator again!", end='')
-    while (menu_option != 3):
+    while (menu_option != 4):
         match menu_option:
             case 1:
                 startRun(stats)
             case 2:
                 openShop(stats)
             case 3:
+                print("\nStatistics")
+                print("----------")
+                print(f'Shards: {stats[0]}')
+                print(f'Health: {stats[1]}')
+                print(f'Attack: {stats[2]}')
+                print(f'Defense: {stats[3]}')
+                print(f'Speed: {stats[4]}')
+                print("Skills: ", end='')
+                for i in range(len(stats[5]) - 1):
+                    print(f'{stats[5][i]}, ', end='')
+                print(f'{stats[5][-1]}')
+                print(f'Number of runs: {stats[6]}')
+                print(f'Enter 0 to exit: ', end='')
+                stat_option = input()
+                while stat_option not in {"0"}:
+                    print("Invalid input! Please enter an integer from the menu selection: ", end='')
+                    stat_option = input()
+                stat_option = int(stat_option)
+                print("")
+                if(stat_option==0):
+                    openStart(stats)
+            case 4:
                 continue
 
 def startRun(stats):
-    pass
+    player = Player(stats)
+    i=1
+    while(stats[1]!=0):
+        print(f'Wave {i} incoming...')
+        print(f'{i} baby monsters, {i//5} adult monsters, and {i//10} boss monsters have appeared')
+        monster_wave = []
+        for j in range (i):
+            monster_wave.append(Baby(i))
+        for k in range (i//5):
+            monster_wave.append(Adult(i))
+        for l in range (i//10):
+            monster_wave.append(Boss(i))
+        if (monster_wave[0].speed > player.speed):
+            turn = 0
+        else:
+            turn = 1
+        while(len(monster_wave) != 0):
+            if(turn==0):
+                print(f'\n{monster_wave[0].name} monster\'s turn, it attacks you for {monster_wave[0].dmg(player)} damage')
+                print(f'You have {player.defend(monster_wave[0].attack)} health remaining')
+                turn=1
+                if(player.health==0):
+                    print(f'\nGAME OVER\n\nYou earned {player.shards} unobtainium shards\nReturning to Menu...\n')
+                    stats[0]+=player.shards
+                    stats[6]+=1
+                    openStart(stats)
+
+            else:
+                print("\nYour turn!\nWhich skill would you like to use?")
+                print("Skills: ")
+                for m in range(len(stats[5]) ):
+                    print(f'{stats[5][m]}')
+                print("Which skill? (0 to exit combat and forgo shards) ", end ='')
+                skill_select = input().lower()
+                while not skill_select not in {0, stats[5][0], stats[5][1], stats[5][2]}:
+                    print("Invalid input! Please enter a skill from the menu selection: ", end='')
+                    skill_select = input().lower()
+
+                match skill_select:
+                    case "0":
+                        print("")
+                        openStart(stats)
+                    case "ram":
+                        monster_wave[0].defend(player.ram(monster_wave[0]))
+                        player.defend(player.dmg(player))
+                        print(f'You deal {player.ram(monster_wave[0])-monster_wave[0].defense} damage to {monster_wave[0].name} and you did {player.dmg(player)} damage to yourself')
+                        print(f'The monster has {monster_wave[0].health} health left and you have {player.health} health left')
+                    case "blast":
+                        monster_wave[0].defend(player.blast(monster_wave[0]))
+                        print(f'You deal {player.blast(monster_wave[0])-monster_wave[0].defense} damage to {monster_wave[0].name}')
+                        print(f'The monster has {monster_wave[0].health} health left and you have {player.health} health left')
+                    case "rocket":
+                        dmg=player.rocket(monster_wave[0])
+
+                        monster_wave[0].defend(dmg)
+                        print(f'You deal {dmg - monster_wave[0].defense} damage to {monster_wave[0].name}')
+                        print(f'The monster has {monster_wave[0].health} health left and you have {player.health} health left')
+                    case "teleport":
+                        check=random.randint(1,100)
+                        if(check<=player.speed):
+                            print(f'You teleported past {monster_wave[0].name} monster')
+                            monster_wave.pop(0)
+                        else:
+                            print(f'Teleportation failed!')
+                        print(f'{len(monster_wave)} monsters remain')
+                    case "repair":
+                        hp=player.repair(stats)
+                        if(hp==-1):
+                            print(f'Repaired in time!\n You are back to full health!')
+                            print(f'You have {player.health} health left')
+                        elif(hp==-2):
+                            print(f'Repair failed!')
+                        else:
+                            print(f'Healed 5 hp, you have {player.health} health left')
+                    case "siphon":
+                        player.siphon()
+                    case "explode":
+                        monster_wave[0].defend(player.explode(monster_wave[0]))
+                        player.defend(player.explode(player))
+                        print(f'{monster_wave[0].name} monster was defeated you earned {monster_wave[0].shards} unobtainium shards')
+                        player.shards += monster_wave[0].shards
+                        monster_wave.pop(0)
+                        print(f'{len(monster_wave)} monsters remain')
+                        if (player.health == 0):
+                            print(f'\nGAME OVER\n\nYou earned {player.shards} unobtainium shards\nReturning to Menu...\n')
+                            stats[0] += player.shards
+                            stats[6] += 1
+                            openStart(stats)
+
+                turn=0
+                if(len(monster_wave)!=0 and monster_wave[0].health<=0):
+                    print(f'{monster_wave[0].name} monster was defeated you earned {monster_wave[0].shards} unobtainium shards')
+                    player.shards+=monster_wave[0].shards
+                    monster_wave.pop(0)
+                    print(f'{len(monster_wave)} monsters remain')
+                if(len(monster_wave)==0):
+                    print(f'\nWave Deafeated!\n')
+        i+=1
 
 def openShop(stats):
     print("Welcome to the HyperGator sssshop")
@@ -61,7 +183,8 @@ def openShop(stats):
     print("Skills: ", end = '')
     for i in range (len(stats[5])-1):
         print(f'{stats[5][i]}, ', end ='')
-    print(f'{stats[5][-1]}\n')
+    print(f'{stats[5][-1]}')
+    print(f'Number of Runs: {stats[6]}\n')
 
     print("What would you like to buy?")
     print("\nShop Menu")
@@ -174,16 +297,16 @@ def openShop(stats):
                 print("2. Blast")
                 print("3. Rocket")
                 print("4. Teleport")
-                print("5. Update")
+                print("5. Repair")
                 print("6. Siphon")
                 print("7. Explode")
                 print("8. Exit")
                 print("Enter Menu Selection: ", end = '')
-                print('')
                 skill_option = input()
                 while not skill_option.isnumeric() or skill_option not in {"1", "2", "3", "4", "5", "6", "7", "8"}:
                     print("Invalid input! Please enter an integer from the menu selection: ", end='')
                     skill_option = input()
+                print('')
                 skill_option = int(skill_option)
                 match skill_option:
                     case 1:
@@ -254,6 +377,7 @@ def openShop(stats):
                     case 3:
                         print("You fire a rocket")
                         print("-50% chance to deal triple your attack points in damage")
+                        print("-50% chance to miss")
                         print("\nCost is 600 shards")
                         print("Are you sure you want to buy the skill Rocket?\nYes or No? ", end='')
                         confirm = input()
@@ -315,10 +439,10 @@ def openShop(stats):
                             stats[0] -= 1100
                         openShop(stats)
                     case 5:
-                        print("You update part of your ship")
-                        print("-Gain 5 Health Points")
+                        print("You repair part of your ship")
+                        print("-(50+speed)% chance to heal 5 Health Points")
                         print("\nCost is 1700 shards")
-                        print("Are you sure you want to buy the skill Update?\nYes or No? ", end='')
+                        print("Are you sure you want to buy the skill Repair?\nYes or No? ", end='')
                         confirm = input()
                         while confirm not in {"Yes", "No", "Y", "N"} or 1700 > stats[0]:
                             if confirm not in {"Yes", "No", "Y", "N"}:
@@ -342,13 +466,14 @@ def openShop(stats):
                                 slot_option = input()
                             print('')
                             slot_option = int(slot_option)
-                            stats[5][slot_option - 1] = "Update"
+                            stats[5][slot_option - 1] = "Repair"
                             stats[0] -= 1700
                         openShop(stats)
                     case 6:
-                        print("You siphon health for shield")
+                        print("You siphon health to shield and speed")
                         print("-You lose 5 health")
-                        print("-You gain 5 shield")
+                        print("-You gain 2 shield")
+                        print("-You gain 2 speed")
                         print("\nCost is 2800 shards")
                         print("Are you sure you want to buy the skill Siphon?\nYes or No? ", end='')
                         confirm = input()
@@ -381,7 +506,7 @@ def openShop(stats):
                     case 7:
                         print("You blow up the exterior of your ship")
                         print("-You deal 100 damage to the current enemy")
-                        print("-The run ends")
+                        print("-The deal 100 damage to yourself")
                         print("\nCost is 4500 shards")
                         print("Are you sure you want to buy the skill Explode?\nYes or No? ", end='')
                         confirm = input()
@@ -419,8 +544,100 @@ def openShop(stats):
                 openStart(stats)
                 continue
 
+class Creatures():
+    def __init__(self):
+        self.health=0
+        self.attack=0
+        self.defense=0
+        self.speed=0
+
+    def explode(self, target):
+        return 100
+    def siphon(self):
+        self.health-=5
+        self.defense+=2
+        self.speed+=2
+
+    def repair(self, stats):
+        check = random.randint(1,100)
+        if(check<=self.speed):
+            if(self.health+5>stats[1].health):
+                self.health=stats[1].health
+                return -1;
+            else:
+                self.health+=5
+                return self.health
+        return -2
+
+    def rocket(self, target):
+        check=random.randint(1,2)
+        if(check==1):
+            dmg=3*self.attack - target.defense
+        else:
+            dmg=0
+        if(dmg>0):
+            return dmg
+        return 0
+
+    def blast(self, target):
+        dmg=self.attack//2 - target.defense
+        if(dmg>0):
+            return dmg
+        return 0
+
+    def defend(self, attack):
+        if(attack-self.defense>0):
+            self.health -= attack-self.defense
+        if(self.health<0):
+            self.health=0
+        return self.health
+
+    def dmg(self, target):
+        dmg=self.attack - target.defense
+        if(dmg> 0):
+            return dmg
+        return 0
+
+    def ram(self, target):
+        if(self.attack<=target.defense):
+            return 0
+        return self.attack
 
 
+class Adult(Creatures):
+    def __init__(self, wave):
+        self.health = 2 * wave
+        self.attack = 2 * wave
+        self.defense = 2 * wave
+        self.speed = 2 * wave
+        self.shards = 10 * wave
+        self.name="Adult"
 
+class Baby(Creatures):
+    def __init__(self, wave):
+        self.health = 2 + wave
+        self.attack = 2 + wave
+        self.defense = 2 + wave
+        self.speed = 2 + wave
+        self.shards = 10 + wave
+        self.name="Baby"
+
+class Boss(Creatures):
+    def __init__(self, wave):
+        self.health = math.pow(2, wave)
+        self.attack = math.pow(2, wave)
+        self.defense = math.pow(2, wave)
+        self.speed = math.pow(2, wave)
+        self.shards = 100*wave
+        self.name="Boss"
+
+class Player(Creatures):
+    def __init__(self, stats):
+        self.health = stats[1]
+        self.attack = stats[2]
+        self.defense = stats[3]
+        self.speed = stats[4]
+        self.skills = stats[5]
+        self.shards = 0
 if __name__ == "__main__":
     main()
