@@ -41,10 +41,11 @@ const btn = document.getElementsByTagName('button');
         let yuhsuh = document.createElement('p');
         yuhsuh.className = "text-output"
         displayingData.append(yuhsuh);
+        
 
-        setTimeout(() =>  { tittle.remove();
-            document.title.remove()
-            topSection.style.height = 40
+        setTimeout(() =>  { 
+            topSection.style.height = 40;
+            tittle.remove();
 
         } , 5000);
 

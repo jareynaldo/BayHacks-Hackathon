@@ -2,6 +2,9 @@
 #Contains Guardian Monsters Artwork by Georg Eckert / limbusdev
 import math
 import random
+from pyscript import document
+
+
 
 def main():
     numRuns = 0
@@ -20,7 +23,14 @@ def main():
     print("Ya know... on account of it being unobtainium and all.")
     print("Anywayssss, that's why we hired you.... What was your name again? \n")
     print("Enter player name: ", end ='')
-    player_name=input()
+    player_name = "";
+    btn = document.querySelector("start-btn")
+    def startGame(btn):
+        input_text = document.querySelector("#name-input")
+        player_name = input_text.value
+
+    btn.bind('click', startGame)
+
     print(f'Ah yes, the infamoussss Gator Pirate {player_name} \n')
 
     print("Next time you pop around, I'll have a sssshop open for you")
